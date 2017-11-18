@@ -4,41 +4,47 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
+
+const backgroundColorPostContainer = '#ffffff';
+const shadowColorPostContainer = '#DA6C6C';
+const borderColorPostContainer = '#EEEEEE';
+const colorTitle = '#333333';
+const colorAuthor = '#999999';
+const colorDescription = '#666666';
 
 const styles = StyleSheet.create({
-
-  postContainer:  {
+  postContainer: {
     margin: 20,
     padding: 15,
-    backgroundColor: '#ffffff',
-    shadowColor: '#DA6C6C',
+    backgroundColor: backgroundColorPostContainer,
+    shadowColor: shadowColorPostContainer,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowRadius: 5,
     shadowOpacity: 1.0,
   },
-
-  postHeader : {
+  postHeader: {
     borderBottomWidth: 1,
-    borderColor: '#EEEEEE',
+    borderColor: borderColorPostContainer,
   },
   title: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#333333',
+    color: colorTitle,
   },
   author: {
-    color: '#999999',
+    color: colorAuthor,
   },
-  containerDescription:{
+  containerDescription: {
     marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   description: {
-    color: '#666666',
+    color: colorDescription,
   },
 });
 
@@ -46,12 +52,19 @@ const Post = ({ post }) => (
   <View style={styles.postContainer}>
     <View style={styles.postHeader}>
       <Text style={styles.title}>{post.title}</Text>
-      <Text>{post.author}</Text>
+      <Text style={styles.author}>{post.author}</Text>
     </View>
     <View style={styles.containerDescription}>
-      <Text>{post.description}</Text>
+      <Text style={styles.description}>{post.description}</Text>
     </View>
   </View>
 );
-export default Post;
 
+Post.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
+};
+export default Post;
